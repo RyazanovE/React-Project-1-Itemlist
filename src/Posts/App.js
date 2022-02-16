@@ -1,6 +1,12 @@
-import React, { useState}  from "react";
+import axios from "axios";
+import React, { useState, useMemo}  from "react";
+
+import MyModal from "../components/modal/MyModal";
 import Form from "../Posts/Form"
 import List from "./List"
+import PostFilter from "./PostFilter.jsx"
+
+
 
 function App() {
     const [posts, setPosts] = useState(
@@ -11,20 +17,34 @@ function App() {
       ],
       []
     );
+    const [SearchQuery, setSearchQuery] = useState('') //search input value 
+    const [visible, setVisible] = useState(false) //modal window
+    const [SelectedSort, setSelectedSort] = useState('')  //тип сортировки
+
+    const searchedQuery = useMemo(() => {
+      return posts.filter(post => post.content.toLowerCase().includes(SearchQuery.toLowerCase()))
+  }, [SearchQuery, posts])
   
-    function SortId() {
-      setPosts((currentPosts) => (currentPosts.map((post, index) => {
-              post.id = index + 1
-              return post
-          })
-      ))
+    async function fetchPosts() {
+      const arr = []
+
+      const response = await axios.get('https://jsonplaceholder.typicode.com/todos/2')
+
+  
+    }
+    
+    
+
+    function SortId(sortType) {
+        setPosts([...posts].sort((a, b) => String(a[sortType]).localeCompare(String(b[sortType]))))   
     }
   
     function removeItem(id) {
-          setPosts(posts.filter((post) => {
-              return post.id !== id
+      fetchPosts()
+           setPosts(posts.filter((postm, ind) => {
+              return ind + 1 !== id
           }))
-      
+        
     }
   
     function changeCheck(id) {
@@ -37,6 +57,7 @@ function App() {
     }
   
     function AddPost(value) {
+      
       if (!posts.length) {
           setPosts((currentPosts) => (currentPosts.concat([{
               content: value,
@@ -52,19 +73,25 @@ function App() {
   }
     }
   
+
+
     return (
-       
-      <div className="container">
-        <div className="mainModule">
-          <div className="form">
-            <Form addPost={AddPost} sort={SortId}/>
-          </div>
-          <div className="list">
-            <List postList={posts}  remove={removeItem} change={changeCheck} ></List>
+        <div className="container"> 
+            <MyModal visible={visible} setVisible={setVisible}>
+                  <Form setVisible={setVisible} postList={posts} setPosts={setPosts} addPost={AddPost} sort={SortId} sort={SelectedSort}/>
+            </MyModal>
+
+          <div className="mainModule">
+
+            <PostFilter setVisible={setVisible} SearchQuery={SearchQuery} setSearchQuery={setSearchQuery} setSelectedSort={setSelectedSort} SelectedSort={SelectedSort} SortId={SortId}/>
+
+            <div className="list">
+           
+              <List postList={searchedQuery}  remove={removeItem} change={changeCheck} ></List>
+
+            </div>
           </div>
         </div>
-      </div>
-    
     );
   }
 

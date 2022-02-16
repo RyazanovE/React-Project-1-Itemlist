@@ -14,7 +14,9 @@ function ListItem(props) {
     <div className="checkbox"><input type="checkbox" onChange={() => {props.change(props.elemID)}}></input></div>
       <div className="itemID">{props.elemID}</div>
       <div className={contentClasses.join(' ')}>{props.elemContent}</div>
-      <button className="delete-button" onClick={() => {props.remove(props.elemID)}}> &#10006;</button>
+      <button className="delete-button" onClick={() => {props.remove(props.elemID)
+      
+      }}> &#10006;</button>
     </div>
     
   );

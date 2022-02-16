@@ -1,12 +1,12 @@
 import React, { useState}  from "react";
 
-
+import MyInput from "../components/input/MyInput";
 
 function Form(props) {
-    const [inputValue, setValue] = useState('')
+    const [inputValue, setValue] = useState('')           //значение input для addtask
     
+   
   
-
     function inputSubmit() {
         if (!inputValue.trim()) {
             alert("error")
@@ -16,14 +16,17 @@ function Form(props) {
         }
     }
 
+   
     return (
         <form onSubmit={(event) => {
             event.preventDefault()
-            inputSubmit()}
+            inputSubmit()
+            props.setVisible(false)
+        }
         }>
-          <input type="text" placeholder="Enter task" value={inputValue}  onChange={(event) => {setValue(event.target.value)}}></input>
-          <button type="button" onClick={() => {props.sort()}} style={{width: "50px"}}>Sort</button>
-          <button type="submit" style={{width: "50px"}}>Add</button>
+          <MyInput type="text" placeholder="Enter task" value={inputValue}  onChange={(event) => {setValue(event.target.value)}}></MyInput>
+          <button type="submit" style={{width: "50px", marginRight: "40px"}}>Add</button>
+          
         </form>
       );
 }
