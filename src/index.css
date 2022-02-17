@@ -13,12 +13,11 @@
 .mainModule {
     margin: auto;
     margin-top: 200px;
-    width: 500px;
+    width: 600px;
     height: 500px;
     text-align: center;
-
-    background-color: rgb(132, 133, 133);
-    border-radius: 15px;
+    box-shadow: 2px 2px 20px black;
+ 
 }
 
 .form {
@@ -30,9 +29,13 @@
 
 .list {
     display: flex;
-    flex-direction: column;
-    margin: 50px;
-    width: auto;
+    justify-content: center;
+    padding: 30px 50px 0px 50px;
+    height: 388px;
+}
+
+.list-mygroup {
+    margin: 0 auto;
 }
 
 .itemList {
@@ -65,23 +68,32 @@
 }
 
 .content {
-    width: 80%;
-    line-height: 40px;
-    background-color: azure;
+    width: 300px;
+  margin-left: 20px;
+text-align: center;
 }
 
 .checked {
     text-decoration: line-through;
 }
 
-.delete-button {
-    border-radius: 0 10px 10px 0;
-    cursor: pointer;
-    width: 10%;
-    background-color: rgb(224, 97, 97);
-    text-align: center;
 
-    border: 0; 
+.check  {
+    width: 20px;
+
+}
+
+.check-num {
+ 
+    margin-left: 10px;
+}
+
+.post-item {
+   
+    display: flex;
+    align-items: center;
+    height: 40px;
+    font-size: 14px;
 }
 
 .post-enter {

@@ -6,18 +6,22 @@ function List(props) {
 
  if (props.postList.length) {
    return (
+    <ul className="list-group list-mygroup">
     <TransitionGroup >
-
  { props.postList.map((el, index) => {
     return (
       <CSSTransition classNames="post" timeout={500}  key={el.id}>
-          <ListItem elemID={index+1} elemContent={el.content} elemCompl={el.completed} remove={props.remove} change={props.change}></ListItem> 
+         
+            <ListItem elemID={index+1} num={el.id} elemContent={el.title} elemCompl={el.completed} remove={props.remove} change={props.change}></ListItem> 
+         
       </CSSTransition> 
     )
   }
   )
   }
+
   </TransitionGroup>
+     </ul>
 
    )
 
