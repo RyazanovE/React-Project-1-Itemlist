@@ -22,6 +22,7 @@ function Posts() {
     const [totalPages, setTotalPages] = useState(0) //всего страниц
     const [limit, setLimit] = useState(8) //лимит страниц в запросе
     const [page, setPage, pagesArray] = usePagination(totalPages)   //текущая страницв
+
     const [fetchPosts, isPostsLoading, postError] = useFetching(async () => {
      
       const response = await PostService.getAll(limit, page)
@@ -71,7 +72,7 @@ function Posts() {
               id: 1,
               completed: false
           }])))
-      } else if (posts.length < limit){
+      } else if (posts.length < limit + 2){
       setPosts((currentPosts) => (currentPosts.concat([{
           title: value,
           id: currentPosts[ currentPosts.length-1].id+1,
